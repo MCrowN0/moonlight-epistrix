@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dyi0uyocoewci"]
+
+[ext_resource type="Script" uid="uid://dxe4tuesjnrxm" path="res://engine/nodes/health_bar.gd" id="1_xu74b"]
+
+[node name="HealthBar" type="Node2D" unique_id=140930409]
+script = ExtResource("1_xu74b")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1149859730]
+offset_left = 275.0
+offset_top = 646.0
+offset_right = 998.0
+offset_bottom = 672.0
+pivot_offset = Vector2(723, 0)
+color = Color(0, 0, 0, 1)
+
+[node name="FillLeft" type="ColorRect" parent="BG" unique_id=760811096]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 719.0
+offset_bottom = 22.0
+pivot_offset = Vector2(723, 0)
+color = Color(0.40146014, 0.40146014, 0.40146014, 1)

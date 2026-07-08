@@ -1,3 +1,16 @@
-# Godot 4+ specific ignores
 .godot/
-/android/
+.vscode/
+engine/core/rust/overkilladdons/target/flycheck0
+discord/rust/overkilladdons-discord/target/flycheck0
+engine/core/rust/overkilladdons/target/debug/*
+!engine/core/rust/overkilladdons/target/debug/*.dll
+engine/core/rust/overkilladdons/target/debug/*.pdb
+engine/core/rust/overkilladdons/target/release/*
+!engine/core/rust/overkilladdons/target/release/*.dll
+engine/core/rust/overkilladdons/target/release/*.pdb
+discord/rust/overkilladdons-discord/target/debug/*
+!discord/rust/overkilladdons-discord/target/debug/*.dll
+discord/rust/overkilladdons-discord/target/release/*
+!discord/rust/overkilladdons-discord/target/release/*.dll
+discord/rust/overkilladdons-discord/target/debug/~overkilladdons_discord.dll
+engine/core/rust/overkilladdons/target/debug/~overkilladdons.dll

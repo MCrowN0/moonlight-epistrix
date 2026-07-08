@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dldbotxbt3jy5"]
+
+[ext_resource type="Script" uid="uid://c0jykg588bscn" path="res://engine/nodes/script_handler.gd" id="1_0bkps"]
+
+[node name="ScriptHandler" type="Node" unique_id=1719468930]
+script = ExtResource("1_0bkps")

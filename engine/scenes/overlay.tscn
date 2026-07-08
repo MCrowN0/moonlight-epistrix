@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b1l3l7mh40v3n"]
+
+[ext_resource type="Script" uid="uid://bn33idlf88yxu" path="res://engine/scenes/overlay.gd" id="1_35t8h"]
+[ext_resource type="Texture2D" uid="uid://ecvw15cyykwq" path="res://engine/resources/textures/volumebox/volumebox.png" id="2_av4lr"]
+[ext_resource type="Texture2D" uid="uid://cw2yjqrrh6ecc" path="res://engine/resources/textures/volumebox/bars_10.png" id="3_av4lr"]
+
+[node name="Overlay" type="CanvasLayer" unique_id=987948201]
+process_mode = 3
+layer = 128
+script = ExtResource("1_35t8h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1844208598]
+position = Vector2(640, -50)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_av4lr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=149483961]
+modulate = Color(1, 1, 1, 0.192157)
+position = Vector2(0, -25)
+texture = ExtResource("3_av4lr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=1516933052]
+position = Vector2(-101.495, -25)
+texture = ExtResource("3_av4lr")
+offset = Vector2(101.495, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 203, 57)

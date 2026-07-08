@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjuwwlgmah1tm"]
+
+[ext_resource type="Script" uid="uid://ughelhtqkrj0" path="res://engine/examples/test_avif_scene.gd" id="1_3wavh"]
+
+[node name="TestAvifScene" type="Node2D"]
+script = ExtResource("1_3wavh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Strum" type="Strum" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

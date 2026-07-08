@@ -1,0 +1,251 @@
+[gd_scene format=3 uid="uid://383yh46xw7xd"]
+
+[ext_resource type="Script" uid="uid://0mpxy3pob8i4" path="res://engine/scenes/editors/character_editor.gd" id="1_d1wlk"]
+[ext_resource type="Texture2D" uid="uid://fgukjoq3qjcr" path="res://engine/resources/textures/editors/bg.webp" id="2_v8tdm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7yu3"]
+font_size = 15
+
+[node name="CharacterEditor" type="Control" unique_id=1999756697]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_d1wlk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=81844913]
+layer = -1
+
+[node name="BG" type="Sprite2D" parent="CanvasLayer" unique_id=1896702061]
+modulate = Color(0.41, 0.41, 0.41, 1)
+position = Vector2(640, 360)
+texture = ExtResource("2_v8tdm")
+
+[node name="Underlay" type="Sprite2D" parent="." unique_id=1498160678]
+modulate = Color(1, 1, 1, 0.50980395)
+
+[node name="CharacterPreview" type="OffsetAnimatedSprite2D" parent="." unique_id=2145544660]
+position = Vector2(402, 375)
+
+[node name="CharacterLoadFileDialog" type="FileDialog" parent="." unique_id=1171184799]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="CharacterSaveFileDialog" type="FileDialog" parent="." unique_id=224798633]
+oversampling_override = 1.0
+access = 2
+use_native_dialog = true
+
+[node name="CharacterSetIMGFileDialog" type="FileDialog" parent="." unique_id=84955530]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2128761030]
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer2" unique_id=175733304]
+offset_left = 820.0
+offset_top = 20.0
+offset_right = 1270.0004
+offset_bottom = 536.0
+current_tab = 0
+tab_focus_mode = 0
+
+[node name="File" type="Control" parent="CanvasLayer2/TabContainer" unique_id=1308018067]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Save" type="Button" parent="CanvasLayer2/TabContainer/File" unique_id=116792971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 225.0
+offset_right = -0.00036621094
+offset_bottom = -374.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Save"
+
+[node name="Load" type="Button" parent="CanvasLayer2/TabContainer/File" unique_id=2079201761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -225.00037
+offset_bottom = -374.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Load"
+
+[node name="Assets" type="Control" parent="CanvasLayer2/TabContainer" unique_id=614128215]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="SetPath" type="Button" parent="CanvasLayer2/TabContainer/Assets" unique_id=238909039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.00036621094
+offset_bottom = -374.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+text = "Set PNG/WebP/Avif & XML Spritesheet Path"
+
+[node name="Label" type="Label" parent="CanvasLayer2/TabContainer/Assets" unique_id=1978490543]
+modulate = Color(0.61, 0.61, 0.61, 1)
+layout_mode = 0
+offset_top = 132.0
+offset_right = 449.0
+offset_bottom = 167.0
+text = "Image & XML must have the same name."
+horizontal_alignment = 1
+
+[node name="Animations" type="Control" parent="CanvasLayer2/TabContainer" unique_id=18333674]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="CanvasLayer2/TabContainer/Animations" unique_id=1081374939]
+modulate = Color(0.61, 0.61, 0.61, 1)
+layout_mode = 0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 33.0
+text = "Default Animation"
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer2/TabContainer/Animations" unique_id=55157514]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 440.0
+offset_bottom = 71.0
+focus_mode = 0
+search_bar_enabled = true
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer2/TabContainer/Animations" unique_id=691265253]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 440.0
+offset_bottom = 245.0
+focus_mode = 0
+allow_reselect = true
+
+[node name="ShowUnderlay" type="CheckBox" parent="CanvasLayer2/TabContainer/Animations" unique_id=1342920372]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 390.0
+offset_right = 292.0
+offset_bottom = 444.0
+focus_mode = 0
+button_pressed = true
+text = "Underlay default animation
+(for positioning help, editor only)"
+
+[node name="ShowCharacter" type="CheckBox" parent="CanvasLayer2/TabContainer/Animations" unique_id=526702876]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 445.0
+offset_right = 292.0
+offset_bottom = 476.0
+focus_mode = 0
+button_pressed = true
+text = "Show character"
+
+[node name="RenameText" type="LineEdit" parent="CanvasLayer2/TabContainer/Animations" unique_id=360992656]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 250.0
+offset_right = 163.0
+offset_bottom = 285.0003
+focus_mode = 1
+placeholder_text = "New name"
+
+[node name="RenameButton" type="Button" parent="CanvasLayer2/TabContainer/Animations" unique_id=1884565503]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 250.0
+offset_right = 291.0
+offset_bottom = 285.0
+focus_mode = 0
+text = "Rename Anim"
+
+[node name="FramerateSpinbox" type="SpinBox" parent="CanvasLayer2/TabContainer/Animations" unique_id=1591116515]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 289.0
+offset_right = 164.0
+offset_bottom = 324.0
+max_value = 255.0
+rounded = true
+suffix = "FPS"
+
+[node name="Looped" type="CheckButton" parent="CanvasLayer2/TabContainer/Animations" unique_id=1983661207]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 325.0
+offset_right = 116.0
+offset_bottom = 356.0
+focus_mode = 0
+text = "Looped"
+
+[node name="Label" type="Label" parent="CanvasLayer2" unique_id=101171460]
+offset_left = 821.0
+offset_top = 535.0
+offset_right = 1269.0
+offset_bottom = 710.0
+text = "Scroll to zoom
+Hold scroll wheel to move camera
+Space to play animation
+Arrows or drag to adjust offset
+R to reset offsets for this animation"
+label_settings = SubResource("LabelSettings_q7yu3")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=9167646]
+position = Vector2(640, 360)
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=868047693]
+title = ""
+initial_position = 2
+force_native = true
+dialog_text = "You haven't selected an animation."
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=958037773]
+title = ""
+initial_position = 2
+force_native = true
+ok_button_text = "Yes"
+dialog_text = "Are you sure you wanna reset the offsets for this animation?"
+cancel_button_text = "No"
+
+[connection signal="file_selected" from="CharacterLoadFileDialog" to="." method="_on_character_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="CharacterSaveFileDialog" to="." method="_on_character_save_file_dialog_file_selected"]
+[connection signal="file_selected" from="CharacterSetIMGFileDialog" to="." method="_on_character_set_img_file_dialog_file_selected"]
+[connection signal="pressed" from="CanvasLayer2/TabContainer/File/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer2/TabContainer/File/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="CanvasLayer2/TabContainer/Assets/SetPath" to="." method="_on_set_path_pressed"]
+[connection signal="item_selected" from="CanvasLayer2/TabContainer/Animations/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_clicked" from="CanvasLayer2/TabContainer/Animations/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="toggled" from="CanvasLayer2/TabContainer/Animations/ShowUnderlay" to="." method="_on_show_underlay_toggled"]
+[connection signal="toggled" from="CanvasLayer2/TabContainer/Animations/ShowCharacter" to="." method="_on_show_character_toggled"]
+[connection signal="pressed" from="CanvasLayer2/TabContainer/Animations/RenameButton" to="." method="_on_rename_button_pressed"]
+[connection signal="value_changed" from="CanvasLayer2/TabContainer/Animations/FramerateSpinbox" to="." method="_on_framerate_spinbox_value_changed"]
+[connection signal="toggled" from="CanvasLayer2/TabContainer/Animations/Looped" to="." method="_on_looped_toggled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

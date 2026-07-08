@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bwkke1jlq5typ"]
+
+[ext_resource type="Script" uid="uid://duifxdhp17fyl" path="res://engine/scenes/editors/objects/chart_grid.gd" id="1_64or8"]
+[ext_resource type="Texture2D" uid="uid://dor3tv41ec3hp" path="res://engine/resources/textures/editors/grid.webp" id="2_6gavy"]
+
+[node name="ChartGrid" type="Control" unique_id=1839286462]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_64or8")
+
+[node name="GridBG" type="TextureRect" parent="." unique_id=1772558495]
+texture_filter = 1
+texture_repeat = 2
+layout_mode = 0
+offset_right = 628.0
+offset_bottom = 2667.5
+scale = Vector2(0.286, 0.286)
+texture = ExtResource("2_6gavy")
+stretch_mode = 1
+
+[node name="NoteContainer" type="Control" parent="GridBG" unique_id=318311558]
+anchors_preset = 0
+offset_right = 628.0
+offset_bottom = 2667.0

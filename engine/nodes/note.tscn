@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://pwmak2ki6q8v"]
+
+[ext_resource type="Material" uid="uid://dek0ag1p7cbp7" path="res://shaders/invert.tres" id="2_gaxvp"]
+[ext_resource type="Script" uid="uid://bpr1frrc8budl" path="res://engine/nodes/note.gd" id="2_h1lnd"]
+[ext_resource type="Texture2D" uid="uid://bufeuh3l8mush" path="res://engine/resources/textures/longpur.png" id="3_gaxvp"]
+[ext_resource type="Texture2D" uid="uid://dj0xhpfowcd06" path="res://engine/resources/textures/longnotepur.png" id="4_gaxvp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_42r08"]
+
+[sub_resource type="Gradient" id="Gradient_v16ei"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gaxvp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gaxvp")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Note" type="Note" unique_id=2000993140]
+sprite_frames = SubResource("SpriteFrames_42r08")
+script = ExtResource("2_h1lnd")
+
+[node name="LongNote" type="Line2D" parent="." unique_id=1053022261]
+show_behind_parent = true
+texture_repeat = 2
+material = ExtResource("2_gaxvp")
+points = PackedVector2Array(0, 0, 0, 120)
+width = 50.0
+gradient = SubResource("Gradient_v16ei")
+texture = ExtResource("3_gaxvp")
+texture_mode = 1
+joint_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="End" type="AnimatedSprite2D" parent="LongNote" unique_id=1318891327]
+material = ExtResource("2_gaxvp")
+position = Vector2(0, 152)
+sprite_frames = SubResource("SpriteFrames_gaxvp")

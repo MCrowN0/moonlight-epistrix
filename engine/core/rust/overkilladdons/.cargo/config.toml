@@ -1,0 +1,6 @@
+[env]
+AOM_TARGET_CPU = "generic"
+GODOT_RUST_NOWARN = "GodotWithoutDeprecated"
+
+[target.'cfg(all())']
+rustflags = ["--cfg", "godot_without_deprecated"]

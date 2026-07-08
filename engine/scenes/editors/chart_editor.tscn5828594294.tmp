@@ -1,0 +1,305 @@
+[gd_scene format=3 uid="uid://hkpwu1bwm17s"]
+
+[ext_resource type="Script" uid="uid://d1qu745hvqb3g" path="res://engine/scenes/editors/chart_editor.gd" id="1_o4tj8"]
+[ext_resource type="Texture2D" uid="uid://fgukjoq3qjcr" path="res://engine/resources/textures/editors/bg.webp" id="2_3oy0r"]
+[ext_resource type="PackedScene" uid="uid://bwkke1jlq5typ" path="res://engine/scenes/editors/objects/chart_grid.tscn" id="2_u4t8f"]
+[ext_resource type="Script" uid="uid://4hcqukxhjaxd" path="res://engine/scenes/editors/foldable_container.gd" id="4_d4rvc"]
+[ext_resource type="Script" uid="uid://cuoh68bnqpmhd" path="res://engine/scenes/editors/objects/tab_container.gd" id="4_j8oue"]
+[ext_resource type="Texture2D" uid="uid://ibil2n657xai" path="res://engine/resources/textures/editors/charter/event-icons/BPM Change.png" id="6_6ahli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4rvc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.39215687)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_vm8jk"]
+line_spacing = 2.945
+font_size = 12
+
+[node name="ChartEditor" type="Control" unique_id=1207372155]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o4tj8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2140190850]
+layer = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=2094726200]
+modulate = Color(0.20966567, 0.20966567, 0.20966567, 1)
+position = Vector2(640, 360)
+texture = ExtResource("2_3oy0r")
+
+[node name="ChartGrid" parent="." unique_id=580614453 instance=ExtResource("2_u4t8f")]
+layout_mode = 1
+offset_left = 400.0
+offset_right = -700.0
+
+[node name="ChartGrid2" parent="." unique_id=1677776408 instance=ExtResource("2_u4t8f")]
+layout_mode = 1
+offset_left = 585.0
+offset_right = -515.0
+
+[node name="NextChartGrid" parent="." unique_id=622339115 instance=ExtResource("2_u4t8f")]
+modulate = Color(0.7, 0.7, 0.7, 1)
+layout_mode = 1
+offset_left = 400.0
+offset_top = 718.0
+offset_right = -700.0
+offset_bottom = 718.0016
+
+[node name="NextChartGrid2" parent="." unique_id=1691056604 instance=ExtResource("2_u4t8f")]
+modulate = Color(0.7, 0.7, 0.7, 1)
+layout_mode = 1
+offset_left = 585.0
+offset_top = 718.0
+offset_right = -515.0
+offset_bottom = 718.0006
+
+[node name="ScrollLine" type="ColorRect" parent="." unique_id=994996062]
+layout_mode = 0
+offset_left = 400.0
+offset_right = 764.6
+offset_bottom = 5.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=242806838]
+position = Vector2(640, 360)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1951782556]
+
+[node name="FoldableContainer" type="FoldableContainer" parent="CanvasLayer2" unique_id=1955202129]
+offset_left = 829.0
+offset_top = 26.0
+offset_right = 1229.0
+offset_bottom = 440.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d4rvc")
+script = ExtResource("4_d4rvc")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer2/FoldableContainer" unique_id=293639451]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 3
+script = ExtResource("4_j8oue")
+
+[node name="Charting" type="Control" parent="CanvasLayer2/FoldableContainer/TabContainer" unique_id=626108061]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Metronome" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=394547586]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 168.0
+offset_bottom = 74.0
+focus_mode = 0
+text = "Metronome"
+
+[node name="ContinuousScrolling" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=1995133706]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 20.0
+offset_right = 373.0
+offset_bottom = 74.0
+focus_mode = 0
+button_pressed = true
+text = "Continuous
+Scrolling"
+
+[node name="InstrumentalWaveform" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=148675216]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 70.0
+offset_right = 170.0
+offset_bottom = 124.00001
+focus_mode = 0
+text = "Waveform for
+Instrumental"
+
+[node name="VoicesWaveform" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=1142287244]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 70.0
+offset_right = 375.0
+offset_bottom = 124.00001
+focus_mode = 0
+text = "Waveform for
+Voices"
+
+[node name="BFPlaySound" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=767729657]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 120.0
+offset_right = 170.0
+offset_bottom = 174.0
+focus_mode = 0
+text = "Play Sound
+(Boyfriend)"
+
+[node name="OpponentPlaySound" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Charting" unique_id=1242504450]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 120.0
+offset_right = 375.0
+offset_bottom = 174.0
+focus_mode = 0
+text = "Play Sound
+(Opponent)"
+
+[node name="Note" type="Control" parent="CanvasLayer2/FoldableContainer/TabContainer" unique_id=1964726397]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Section" type="Control" parent="CanvasLayer2/FoldableContainer/TabContainer" unique_id=659514365]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="BPMChange" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Section" unique_id=1137565938]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 168.0
+offset_bottom = 74.0
+focus_mode = 0
+text = "BPM Change"
+icon = ExtResource("6_6ahli")
+
+[node name="HitSection" type="CheckButton" parent="CanvasLayer2/FoldableContainer/TabContainer/Section" unique_id=658647054]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 20.0
+offset_right = 373.0
+offset_bottom = 74.0
+focus_mode = 0
+button_pressed = true
+text = "Hit Section"
+
+[node name="Song" type="Control" parent="CanvasLayer2/FoldableContainer/TabContainer" unique_id=1241033866]
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="BPM" type="SpinBox" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=506004016]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 31.0
+offset_right = 364.0
+offset_bottom = 62.0
+max_value = 9999.0
+value = 130.0
+suffix = "BPM"
+
+[node name="ChartStatus" type="Label" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=1939880783]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 64.0
+offset_right = 372.0
+offset_bottom = 93.0
+text = "No chart loaded."
+label_settings = SubResource("LabelSettings_vm8jk")
+vertical_alignment = 2
+
+[node name="Load" type="Button" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=637796904]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 95.0
+offset_right = 374.0
+offset_bottom = 128.0
+text = "Load Chart"
+
+[node name="Save" type="Button" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=1006237733]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 133.0
+offset_right = 374.0
+offset_bottom = 166.0
+text = "Save Chart"
+
+[node name="InstStatus" type="Label" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=537737018]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 169.0
+offset_right = 372.0
+offset_bottom = 198.0
+text = "No inst loaded."
+label_settings = SubResource("LabelSettings_vm8jk")
+vertical_alignment = 2
+
+[node name="LoadInst" type="Button" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=452432343]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 197.0
+offset_right = 375.0
+offset_bottom = 230.0
+text = "Load Inst"
+
+[node name="VoicesStatus" type="Label" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=808190866]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 219.0
+offset_right = 372.0
+offset_bottom = 248.0
+text = "No voices loaded."
+label_settings = SubResource("LabelSettings_vm8jk")
+vertical_alignment = 2
+
+[node name="LoadVoices" type="Button" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=1941682820]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 247.0
+offset_right = 375.0
+offset_bottom = 280.0
+text = "Load Voices"
+
+[node name="UnLoadVoices" type="Button" parent="CanvasLayer2/FoldableContainer/TabContainer/Song" unique_id=479348122]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 285.0
+offset_right = 375.0
+offset_bottom = 318.0
+text = "UnLoad Voices"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2" unique_id=187108046]
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 391.0
+offset_bottom = 208.0
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/italics_font_size = 20
+bbcode_enabled = true
+text = "[b]BEAT[/b] [i][ 0 ][/i]
+[b]STEP[/b] [i][ 0 ][/i]
+[b]SECTION[/b] [i][ 0 ][/i]
+[b]BPM[/b] [i][ 0 ][/i]"
+
+[node name="Instrumental" type="AudioStreamPlayer" parent="." unique_id=1764449829]
+
+[node name="Voices" type="AudioStreamPlayer" parent="." unique_id=644743266]
+
+[node name="Conductor" type="Conductor" parent="." unique_id=941201624]
+
+[node name="ChartLoadFileDialog" type="FileDialog" parent="." unique_id=43634386]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+use_native_dialog = true
+
+[node name="ChartSaveFileDialog" type="FileDialog" parent="." unique_id=2137669882]
+oversampling_override = 1.0
+use_native_dialog = true
+
+[connection signal="folding_changed" from="CanvasLayer2/FoldableContainer" to="." method="_on_foldable_container_folding_changed"]
+[connection signal="tab_changed" from="CanvasLayer2/FoldableContainer/TabContainer" to="CanvasLayer2/FoldableContainer/TabContainer" method="_on_tab_changed"]
+[connection signal="pressed" from="CanvasLayer2/FoldableContainer/TabContainer/Song/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="CanvasLayer2/FoldableContainer/TabContainer/Song/Save" to="." method="_on_save_pressed"]
+[connection signal="file_selected" from="ChartLoadFileDialog" to="." method="_on_chart_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="ChartSaveFileDialog" to="." method="_on_chart_save_file_dialog_file_selected"]

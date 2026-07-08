@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxmohxfxjp84k"]
+
+[ext_resource type="Script" uid="uid://d4ec4mgyuciea" path="res://engine/scenes/reference_play_scene.gd" id="1_qu2lj"]
+[ext_resource type="PackedScene" uid="uid://dhatirim1rqvd" path="res://engine/nodes/strum.tscn" id="2_o5idm"]
+[ext_resource type="Shader" uid="uid://ca6l0d8jpctmq" path="res://engine/shaders/scroll.gdshader" id="3_1tx34"]
+[ext_resource type="PackedScene" uid="uid://ba3746a2us4gn" path="res://engine/nodes/chart_handler.tscn" id="3_o5idm"]
+[ext_resource type="AudioStream" uid="uid://62jugtabo47m" path="res://engine/resources/songs/a-wish-es/Inst.ogg" id="5_12tc0"]
+[ext_resource type="AudioStream" uid="uid://ourymu6ybyi3" path="res://engine/resources/songs/a-wish-es/Voices.ogg" id="6_03x27"]
+[ext_resource type="Texture2D" uid="uid://bkaxthd571k2t" path="res://engine/resources/textures/stageback.png" id="7_uxveu"]
+[ext_resource type="Texture2D" uid="uid://tel8phpk3cgx" path="res://engine/resources/textures/stagefront.png" id="8_12tc0"]
+[ext_resource type="Texture2D" uid="uid://gl00la7nf20o" path="res://engine/resources/textures/stagecurtains.png" id="9_03x27"]
+[ext_resource type="Script" uid="uid://dddbgrhvttq6x" path="res://engine/core/spritesheet/character.gd" id="10_12tc0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sx3lh"]
+shader = ExtResource("3_1tx34")
+shader_parameter/scroll_speed = Vector2(0.32, 0)
+shader_parameter/wave_strength = 0.0
+shader_parameter/wave_frequency = 10.0
+shader_parameter/wave_speed = 2.0
+shader_parameter/rotation_speed = 0.0
+shader_parameter/custom_time = 0.0
+shader_parameter/zoom_min = 0.9
+shader_parameter/zoom_max = 1.1
+shader_parameter/zoom_speed = 0.5
+shader_parameter/color_shift = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hvllj"]
+viewport_path = NodePath("hud/SubViewport")
+
+[node name="play_scene" type="Node2D"]
+script = ExtResource("1_qu2lj")
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="hud"]
+transparent_bg = true
+size = Vector2i(1280, 1280)
+
+[node name="opponent_strum" parent="hud/SubViewport" instance=ExtResource("2_o5idm")]
+physics_interpolation_mode = 0
+offset_left = 40.0
+offset_top = 60.0
+offset_right = -472.0
+offset_bottom = -452.0
+pivot_offset = Vector2(240, 60)
+size_flags_horizontal = 4
+is_cpu_strum = true
+character = NodePath("../../../Opponent")
+metadata/_edit_use_anchors_ = true
+
+[node name="player_strum" parent="hud/SubViewport" instance=ExtResource("2_o5idm")]
+physics_interpolation_mode = 0
+offset_left = 760.0
+offset_top = 60.0
+offset_right = 248.0
+offset_bottom = -452.0
+pivot_offset = Vector2(240, 60)
+size_flags_horizontal = 4
+character = NodePath("../../../BF")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="hud"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_sx3lh")
+position = Vector2(640, 640)
+texture = SubResource("ViewportTexture_hvllj")
+
+[node name="chart_handler" parent="." instance=ExtResource("3_o5idm")]
+opponent_strum = NodePath("../hud/SubViewport/opponent_strum")
+player_strum = NodePath("../hud/SubViewport/player_strum")
+instrumental = NodePath("../inst")
+voices = NodePath("../voices")
+
+[node name="inst" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_12tc0")
+
+[node name="voices" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_03x27")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("7_uxveu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(640, 640)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("8_12tc0")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(640, 339.135)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("9_03x27")
+
+[node name="BF" type="AnimatedSprite2D" parent="."]
+position = Vector2(865.3, 509.935)
+scale = Vector2(0.6, 0.6)
+offset = Vector2(0, -27.55)
+script = ExtResource("10_12tc0")
+
+[node name="Opponent" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(260.155, 293.6)
+scale = Vector2(4.61, 4.61)
+flip_h = true
+script = ExtResource("10_12tc0")

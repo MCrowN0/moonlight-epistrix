@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://wgo1gkxic4mn"]
+
+[ext_resource type="Script" uid="uid://b0sp70np4jcrq" path="res://engine/scenes/editors/objects/strum_note.gd" id="1_o8kra"]
+
+[node name="StrumNote" type="TextureRect" unique_id=750418869]
+texture_filter = 2
+texture_repeat = 1
+script = ExtResource("1_o8kra")

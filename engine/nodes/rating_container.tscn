@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c2kf1krpj4knm"]
+
+[ext_resource type="Script" uid="uid://ofax3ppisjaq" path="res://engine/nodes/rating_container.gd" id="1_4sbvt"]
+
+[node name="rating_container" type="Node2D" unique_id=1935845824]
+script = ExtResource("1_4sbvt")

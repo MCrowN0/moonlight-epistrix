@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ba3746a2us4gn"]
+
+[ext_resource type="Script" uid="uid://dbbba8eb7umwa" path="res://engine/nodes/chart_handler.gd" id="1_v1yak"]
+
+[node name="ChartHandler" type="Node" unique_id=424160973]
+script = ExtResource("1_v1yak")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dhatirim1rqvd"]
+
+[ext_resource type="Script" uid="uid://chyotf0jthv52" path="res://engine/nodes/strum.gd" id="1_cm4uy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cm4uy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i8kqu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yq7os"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1sxub"]
+
+[node name="Strum" type="Control" unique_id=50215536]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -804.0
+offset_bottom = -601.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = ExtResource("1_cm4uy")
+
+[node name="canvas_group" type="CanvasGroup" parent="." unique_id=661219086]
+use_parent_material = true
+position = Vector2(240, 60)
+
+[node name="left" type="OffsetAnimatedSprite2D" parent="canvas_group" unique_id=964495304]
+use_parent_material = true
+position = Vector2(-181.88, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_cm4uy")
+
+[node name="down" type="OffsetAnimatedSprite2D" parent="canvas_group" unique_id=1250882810]
+use_parent_material = true
+position = Vector2(-61.88, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_i8kqu")
+
+[node name="up" type="OffsetAnimatedSprite2D" parent="canvas_group" unique_id=1994291292]
+use_parent_material = true
+position = Vector2(58.12, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_yq7os")
+
+[node name="right" type="OffsetAnimatedSprite2D" parent="canvas_group" unique_id=915659675]
+use_parent_material = true
+position = Vector2(178.12, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_1sxub")
+
+[node name="InputTracker" type="InputTracker" parent="." unique_id=815495748]
