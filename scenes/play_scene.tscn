@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://blkalog6mv2v4" path="res://scenes/black_bars.tscn" id="6_7pyap"]
 [ext_resource type="Script" uid="uid://bns76gptwndb1" path="res://scripts/global_script.gd" id="7_btd5q"]
 
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_7pyap"]
+stream_count = 3
+stream_0/volume = 0.0
+stream_1/volume = 0.0
+stream_2/volume = 0.0
+
 [node name="PlayScene" type="Node2D" unique_id=1955958117]
 script = ExtResource("1_wklqy")
 
@@ -81,10 +87,11 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("4_ief5h")
 opponent_strum = NodePath("../HUD/OpponentStrum")
 player_strum = NodePath("../HUD/PlayerStrum")
-song_path = NodePath("../Song")
 conductor = NodePath("../Conductor")
 playscene_camera = NodePath("../PlaySceneCamera")
 script_ = NodePath("../EventNode")
+vocal_mode = 2
+song_path = NodePath("../Song")
 metadata/_custom_type_script = "uid://dbbba8eb7umwa"
 
 [node name="Conductor" type="Conductor" parent="." unique_id=2129778993]
@@ -93,3 +100,4 @@ metadata/_custom_type_script = "uid://dbbba8eb7umwa"
 script = ExtResource("7_btd5q")
 
 [node name="Song" type="AudioStreamPlayer" parent="." unique_id=1478710815]
+stream = SubResource("AudioStreamSynchronized_7pyap")

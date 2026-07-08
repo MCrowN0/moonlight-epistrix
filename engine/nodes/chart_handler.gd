@@ -1,9 +1,15 @@
 class_name ChartHandler extends Node
 
+enum VocalMode {
+	Full,
+	InstAndVox,
+	InstAndSeparatedVox
+}
+
+
+
 @export_node_path("Control") var opponent_strum: NodePath
 @export_node_path("Control") var player_strum: NodePath
-
-@export_node_path("AudioStreamPlayer") var song_path: NodePath
 
 @export_node_path("Conductor") var conductor: NodePath
 
@@ -14,13 +20,20 @@ class_name ChartHandler extends Node
 @onready var opponent_strum_node: Strum = get_node_or_null(opponent_strum)
 @onready var player_strum_node: Strum = get_node_or_null(player_strum)
 
-@onready var song_node: AudioStreamPlayer = get_node_or_null(song_path)
-
 @onready var conductor_node: Conductor = get_node_or_null(conductor)
 
 @onready var playscene_camera_node: Camera2D = get_node_or_null(playscene_camera) 
 
 @onready var script_node: EventNode = get_node_or_null(script_)
+
+## stream 0 - inst
+## stream 1 - full vox OR opponent vox
+## stream 2 - player vox
+@export var vocal_mode: VocalMode = VocalMode.Full
+
+@export_node_path("AudioStreamPlayer") var song_path: NodePath
+
+@onready var song_node: AudioStreamPlayer = get_node_or_null(song_path)
 
 var must_hit_section: bool = false
 
