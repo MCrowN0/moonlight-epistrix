@@ -44,7 +44,6 @@ func _enter_tree() -> void:
 			long_note.texture = parent_strum.get("%s_hold_tex" % direction)
 			long_end.play(parent_strum.get("%s_holdend_prefix" % direction))
 			long_note.visible = true
-			long_end.flip_v = parent_strum.downscroll
 		else: 
 			$LongNote.queue_free()
 			long_note = null
@@ -62,6 +61,18 @@ func _enter_tree() -> void:
 				"rotate": rotation_degrees += intensity
 				"skew": skew += intensity
 		)
+		
+		
+var last_downscroll: bool = false
+
+func _rebuild_hold():
+	if long_note:
+		var note_points = PackedVector2Array([
+			Vector2(0, 0),
+			Vector2(0, note_length * (-1 if parent_strum.downscroll else 1))
+		])
+		long_note.points = note_points
+		note_points = null
 
 func _physics_process(delta: float) -> void:
 	current_time = parent_strum.current_time
@@ -71,8 +82,15 @@ func _physics_process(delta: float) -> void:
 	var downscroll: bool = parent_strum.downscroll
 	var scroll_dir: float = -1.0 if downscroll else 1.0
 	
+	if last_downscroll != parent_strum.downscroll:
+		last_downscroll = parent_strum.downscroll
+		_rebuild_hold()
+	
 	scale_offset *= 0.9
 	position_offset *= 0.9
+	
+	if note_length > 0:
+		long_end.flip_v = parent_strum.downscroll
 	
 	if CoolUtil.should_note_be_visible(time_ms, target_time, half_scroll, strum_y, 720.0):
 		position.y = strum_y + ((1 - (time_ms - target_time)) * half_scroll * scroll_dir)

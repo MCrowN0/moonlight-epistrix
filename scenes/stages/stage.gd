@@ -14,7 +14,7 @@ func _init() -> void:
 		if not path == null:
 			set(character, get_node(path))
 
-func _reposition_characters(ext_dad: NodePath, ext_gf: NodePath, ext_bf: NodePath):
+func _reposition_characters(ext_dad, ext_gf, ext_bf):
 	for character in ["dad", "gf", "bf"]:
 			match character:
 				"dad":
@@ -23,10 +23,11 @@ func _reposition_characters(ext_dad: NodePath, ext_gf: NodePath, ext_bf: NodePat
 					get_node(ext_dad).modulate = get_node(dad_path).modulate
 					get_node(dad_path).queue_free()
 				"gf":
-					get_node(ext_gf).position = get_node(gf_path).position
-					get_node(ext_gf).scale = get_node(gf_path).scale
-					get_node(ext_gf).modulate = get_node(gf_path).modulate
-					get_node(gf_path).queue_free()
+					if not ext_gf == null:
+						get_node(ext_gf).position = get_node(gf_path).position
+						get_node(ext_gf).scale = get_node(gf_path).scale
+						get_node(ext_gf).modulate = get_node(gf_path).modulate
+						get_node(gf_path).queue_free()
 				"bf":
 					get_node(ext_bf).position = get_node(bf_path).position
 					get_node(ext_bf).scale = get_node(bf_path).scale

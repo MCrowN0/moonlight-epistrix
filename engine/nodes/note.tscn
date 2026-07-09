@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://pwmak2ki6q8v"]
 
-[ext_resource type="Material" uid="uid://dek0ag1p7cbp7" path="res://shaders/invert.tres" id="2_gaxvp"]
+[ext_resource type="Material" uid="uid://dek0ag1p7cbp7" path="res://invert.tres" id="2_gaxvp"]
 [ext_resource type="Script" uid="uid://bpr1frrc8budl" path="res://engine/nodes/note.gd" id="2_h1lnd"]
 [ext_resource type="Texture2D" uid="uid://bufeuh3l8mush" path="res://engine/resources/textures/longpur.png" id="3_gaxvp"]
 [ext_resource type="Texture2D" uid="uid://dj0xhpfowcd06" path="res://engine/resources/textures/longnotepur.png" id="4_gaxvp"]

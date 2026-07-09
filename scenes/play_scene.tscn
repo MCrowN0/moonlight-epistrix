@@ -7,7 +7,32 @@
 [ext_resource type="PackedScene" uid="uid://dhatirim1rqvd" path="res://engine/nodes/strum.tscn" id="3_kdvgv"]
 [ext_resource type="Script" uid="uid://dbbba8eb7umwa" path="res://engine/nodes/chart_handler.gd" id="4_ief5h"]
 [ext_resource type="PackedScene" uid="uid://blkalog6mv2v4" path="res://scenes/black_bars.tscn" id="6_7pyap"]
+[ext_resource type="Material" uid="uid://dek0ag1p7cbp7" path="res://invert.tres" id="6_741iy"]
 [ext_resource type="Script" uid="uid://bns76gptwndb1" path="res://scripts/global_script.gd" id="7_btd5q"]
+[ext_resource type="Script" uid="uid://bf2k61h8mxq3s" path="res://scripts/fast_foward.gd" id="9_uyxvy"]
+
+[sub_resource type="Shader" id="Shader_hwcyl"]
+code = "shader_type canvas_item;
+
+// Adding filter_nearest or filter_linear can help with caching depending on hardware
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear;
+uniform float percentage = 0.0;
+
+void fragment() {
+    // 1. Read the screen pixel
+    vec3 rgb = texture(screen_texture, SCREEN_UV).rgb;
+    
+    // 2. Standardized Rec. 709 luminance weights (sums exactly to 1.0)
+    float lum = dot(rgb, vec3(0.2126, 0.7152, 0.0722));
+	
+    // 3. Optimized Vector Mix (Runs natively in hardware in 1 cycle)
+    COLOR = vec4(mix(rgb, vec3(lum), percentage), 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyxvy"]
+shader = SubResource("Shader_hwcyl")
+shader_parameter/percentage = 1.165
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_7pyap"]
 stream_count = 3
@@ -39,6 +64,16 @@ position = Vector2(640, 360)
 script = ExtResource("3_ief5h")
 metadata/_custom_type_script = "uid://drey7rnoi6u22"
 
+[node name="BlueGrayscale" type="CanvasLayer" parent="." unique_id=1876697519]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="BlueGrayscale" unique_id=693574814]
+material = SubResource("ShaderMaterial_uyxvy")
+offset_left = -313.0
+offset_top = -160.0
+offset_right = 1593.0
+offset_bottom = 905.0
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1749695221]
 
 [node name="WhiteUnderHud" type="ColorRect" parent="HUD" unique_id=1373874067]
@@ -52,21 +87,33 @@ offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
-[node name="OpponentStrum" parent="HUD" unique_id=50215536 instance=ExtResource("3_kdvgv")]
-offset_left = 40.0
-offset_top = 561.0
+[node name="C" type="SubViewportContainer" parent="HUD" unique_id=580827377]
+material = ExtResource("6_741iy")
 offset_right = 40.0
-offset_bottom = 561.0
-is_cpu_strum = true
-downscroll = true
-character = NodePath("../../Dad")
+offset_bottom = 40.0
 
-[node name="PlayerStrum" parent="HUD" unique_id=352157946 instance=ExtResource("3_kdvgv")]
+[node name="SubViewport" type="SubViewport" parent="HUD/C" unique_id=1702855188]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="OpponentStrum" parent="HUD/C/SubViewport" unique_id=50215536 instance=ExtResource("3_kdvgv")]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
+is_cpu_strum = true
+character = NodePath("../../../../Dad")
+
+[node name="PlayerStrum" parent="HUD/C/SubViewport" unique_id=352157946 instance=ExtResource("3_kdvgv")]
 offset_left = 764.0
 offset_top = 40.0
-offset_right = -40.0
-offset_bottom = -561.0
-character = NodePath("../../Bf")
+offset_right = 252.0
+offset_bottom = -472.0
+is_cpu_strum = true
+character = NodePath("../../../../Bf")
 
 [node name="BlackBars" parent="HUD" unique_id=908073590 instance=ExtResource("6_7pyap")]
 
@@ -85,8 +132,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="ChartHandler" type="Node" parent="." unique_id=1573020241]
 script = ExtResource("4_ief5h")
-opponent_strum = NodePath("../HUD/OpponentStrum")
-player_strum = NodePath("../HUD/PlayerStrum")
+opponent_strum = NodePath("../HUD/C/SubViewport/OpponentStrum")
+player_strum = NodePath("../HUD/C/SubViewport/PlayerStrum")
 conductor = NodePath("../Conductor")
 playscene_camera = NodePath("../PlaySceneCamera")
 script_ = NodePath("../EventNode")
@@ -101,3 +148,6 @@ script = ExtResource("7_btd5q")
 
 [node name="Song" type="AudioStreamPlayer" parent="." unique_id=1478710815]
 stream = SubResource("AudioStreamSynchronized_7pyap")
+
+[node name="Node" type="Node" parent="." unique_id=1867333533]
+script = ExtResource("9_uyxvy")

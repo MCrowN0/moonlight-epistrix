@@ -14,8 +14,14 @@ class_name GlobalScript extends Node
 @onready var black_under_hud: ColorRect = hud.get_node("BlackUnderHud")
 @onready var black_over_hud: ColorRect = hud.get_node("BlackOverHud")
 
-@onready var opponent_strum: Strum = hud.get_node("OpponentStrum")
-@onready var player_strum: Strum = hud.get_node("PlayerStrum")
+@onready var opponent_strum: Strum = hud.get_node("C/SubViewport/OpponentStrum")
+@onready var player_strum: Strum = hud.get_node("C/SubViewport/PlayerStrum")
+
+var bgrayscale_percent: float = 1.165
+@onready var blue_grayscale: ColorRect = play_scene.get_node("BlueGrayscale/ColorRect")
+
+func _physics_process(delta: float) -> void:
+	blue_grayscale.material.set_shader_parameter("percentage", bgrayscale_percent)
 
 func flash(time: float = 1.0, over_hud: bool = false):
 	var white: ColorRect = white_over_hud if over_hud else white_under_hud

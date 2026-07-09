@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://sp4g6sbkuwyk"]
+
+[ext_resource type="Script" uid="uid://dqj6kv2hph2sq" path="res://scenes/stages/supernatural.gd" id="1_xlikv"]
+[ext_resource type="Texture2D" uid="uid://b3mmc5xiytn5v" path="res://resources/textures/stages/supernatural/realistaSky.webp" id="2_e0xg1"]
+[ext_resource type="Texture2D" uid="uid://bhgdgi25ltace" path="res://resources/textures/stages/supernatural/realistaClouds.webp" id="3_yeuor"]
+[ext_resource type="Texture2D" uid="uid://di05vyj705rvw" path="res://resources/textures/stages/supernatural/realistaTrees.webp" id="4_qejsb"]
+[ext_resource type="Texture2D" uid="uid://r6nf0nwqn6bb" path="res://resources/textures/stages/supernatural/realistaSun.webp" id="5_7ofn2"]
+[ext_resource type="Texture2D" uid="uid://ci21g5nahf7ew" path="res://resources/textures/stages/supernatural/realistaVoid.webp" id="6_yqlfs"]
+[ext_resource type="Texture2D" uid="uid://dtauacc88l4d3" path="res://resources/textures/stages/supernatural/realistaCasket.webp" id="7_gb2wx"]
+[ext_resource type="Texture2D" uid="uid://b2ktc1rewsgpw" path="res://resources/textures/characters/satan.png" id="8_yeuor"]
+[ext_resource type="Texture2D" uid="uid://cwn7h0oeuapf2" path="res://resources/textures/characters/michaelfnf.png" id="9_qejsb"]
+
+[sub_resource type="Shader" id="Shader_xew8n"]
+code = "shader_type canvas_item;
+
+uniform vec2 speed = vec2(1.0, 0.0);
+
+void fragment() {
+	COLOR = texture(TEXTURE, mod(UV + TIME * speed, 1.0));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sjuw"]
+shader = SubResource("Shader_xew8n")
+shader_parameter/speed = Vector2(0.03, 0)
+
+[sub_resource type="Shader" id="Shader_qnmjb"]
+code = "shader_type canvas_item;
+
+uniform float aberration_intensity: hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform vec2 r_displacement = vec2(1.0, 0.0);
+uniform vec2 g_displacement = vec2(0.0, 0.0);
+uniform vec2 b_displacement = vec2(-1.0, 0.0);
+
+uniform sampler2D screen_texture : hint_screen_texture, filter_nearest;
+
+void fragment() {
+	float r = texture(screen_texture, fma(-r_displacement * aberration_intensity, SCREEN_PIXEL_SIZE, SCREEN_UV), 0.0).r;
+	float g = texture(screen_texture, fma(-g_displacement * aberration_intensity, SCREEN_PIXEL_SIZE, SCREEN_UV), 0.0).g;
+	float b = texture(screen_texture, fma(-b_displacement * aberration_intensity, SCREEN_PIXEL_SIZE, SCREEN_UV), 0.0).b;
+	float a = texture(screen_texture, SCREEN_UV).a;
+	
+	COLOR = vec4(r, g, b, a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwcyl"]
+shader = SubResource("Shader_qnmjb")
+shader_parameter/aberration_intensity = 2.10000003129252
+shader_parameter/r_displacement = Vector2(1, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-1, 0)
+
+[node name="Supernatural" type="Node2D" unique_id=1009987136]
+script = ExtResource("1_xlikv")
+dad_path = NodePath("Opponent")
+bf_path = NodePath("Player")
+metadata/_custom_type_script = "uid://beu2irc8r6upb"
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1323394029]
+position = Vector2(640, 360)
+texture = ExtResource("2_e0xg1")
+
+[node name="Clouds" type="Sprite2D" parent="." unique_id=1691725979]
+material = SubResource("ShaderMaterial_6sjuw")
+position = Vector2(640, 360)
+texture = ExtResource("3_yeuor")
+
+[node name="Trees" type="Sprite2D" parent="." unique_id=255553833]
+position = Vector2(640, 360)
+texture = ExtResource("4_qejsb")
+
+[node name="Sun" type="Sprite2D" parent="." unique_id=2054725877]
+position = Vector2(640, 360)
+texture = ExtResource("5_7ofn2")
+
+[node name="Void" type="Sprite2D" parent="." unique_id=614277441]
+position = Vector2(640, 360)
+texture = ExtResource("6_yqlfs")
+
+[node name="Casket" type="Sprite2D" parent="." unique_id=424475117]
+position = Vector2(640, 360)
+texture = ExtResource("7_gb2wx")
+
+[node name="Opponent" type="Sprite2D" parent="." unique_id=1640136558]
+position = Vector2(342, 343.96)
+scale = Vector2(0.46, 0.46)
+texture = ExtResource("8_yeuor")
+region_enabled = true
+region_rect = Rect2(1457, 0, 474, 665)
+
+[node name="Player" type="Sprite2D" parent="." unique_id=1323265677]
+position = Vector2(876, 394.768)
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("9_qejsb")
+region_enabled = true
+region_rect = Rect2(519, 690, 244, 293)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=693516823]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer3" unique_id=399676651]
+visible = false
+offset_left = -300.0
+offset_top = -221.0
+offset_right = 1613.0
+offset_bottom = 883.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=435181302]
+layer = 0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=48338361]
+top_level = true
+visibility_layer = 2
+material = SubResource("ShaderMaterial_hwcyl")
+offset_left = -326.0
+offset_top = -173.0
+offset_right = 1598.0
+offset_bottom = 897.0

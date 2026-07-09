@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dek0ag1p7cbp7"]
+
+[sub_resource type="Shader" id="Shader_capb0"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+void fragment() {
+    vec4 sprite = texture(TEXTURE, UV);
+    vec4 screen = texture(SCREEN_TEXTURE, SCREEN_UV);
+    vec3 inverted = vec3(1.0) - screen.rgb;
+    float gray = (inverted.r + inverted.g + inverted.b) / 3.0;
+    vec3 gray_color = vec3(gray);
+
+	vec3 final_color = mix(screen.rgb, gray_color, sprite.a);
+
+	COLOR = vec4(final_color, 1.0) * sprite.a;
+}"
+
+[resource]
+shader = SubResource("Shader_capb0")

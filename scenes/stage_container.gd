@@ -1,6 +1,7 @@
 class_name StageContainer extends Node2D
 
 var stage_scenes: Dictionary[String, PackedScene] = {
+	"supernatural": preload("res://scenes/stages/supernatural.tscn")
 }
 var stage_node: Stage
 var stage: String = "" :

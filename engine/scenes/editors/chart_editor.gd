@@ -5,6 +5,7 @@ const NOTE_SIZE: Vector2 = Vector2(157, 157) * Vector2(0.286, 0.286)
 var local_beat: float = 0
 var _local_oldstep: float = 0.0
 var local_step: float = 0.0
+var v1_chart: bool = false
 
 @onready var conductor: Conductor = $Conductor
 
@@ -108,10 +109,13 @@ func _on_save_pressed() -> void:
 	$ChartSaveFileDialog.popup_centered_ratio()
 
 func _on_chart_load_file_dialog_file_selected(path: String) -> void:
-	
 	if path.ends_with(".json"):
 		chart = ChartResource.new()
-		var chart_data = load(path).data.get("song")
+		var chart_data = load(path).data
+		if chart_data.has("song") and not chart_data.get("song") is String:
+			chart_data = chart_data.get("song")
+		else:
+			v1_chart = true
 		chart.new_empty(chart_data.get("bpm"), chart_data.get("speed"), len(chart_data.get("notes")))
 		var section_index: int = 0
 		for section: Dictionary in chart_data.get("notes"):

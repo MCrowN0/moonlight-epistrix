@@ -158,9 +158,9 @@ func _check_note_hit(note_id: int, target_time: float, note_length: float = 0.0,
 		if not input_note_map.has(current_time * 1000.0) and (is_cpu_strum or input_tracker.get_pressed(note_id)):
 			input_times[note_id].append(current_time * 1000.0)
 			input_note_map[current_time * 1000.0] = target_time
-		else:
-			if not target_time in input_note_map.values():
-				return false
+		#else:
+		#	if not target_time in input_note_map.values():
+		#		return false
 		if result.start_hold:
 			note_hitting[note_id] = true
 		_note_hit(note_id, note_length / 1000.0)
