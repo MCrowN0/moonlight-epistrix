@@ -89,10 +89,20 @@ func start_chart(song_folder_path: String = '', chart_name: String = 'chart.json
 			player_strum_node.connect("advanced_note_hit", func(note_id, note_length, target_time, current_time, start_hold):
 				if start_hold or note_length <= 0:
 					health = clamp(health + health_gain, 0, 1)
+				
+				if vocal_mode == VocalMode.Full: return
+				
+				var song_stream: AudioStreamSynchronized = song_node.stream
+				song_stream.set_sync_stream_volume(1 if vocal_mode == VocalMode.InstAndVox else 2, linear_to_db(1))
 			)
 			@warning_ignore("unused_parameter", "shadowed_variable")
 			player_strum_node.connect("note_miss", func(note_id, must_hit_section):
 				health = clamp(health - health_damage, 0, 1)
+				
+				if vocal_mode == VocalMode.Full: return
+				
+				var song_stream: AudioStreamSynchronized = song_node.stream
+				song_stream.set_sync_stream_volume(1 if vocal_mode == VocalMode.InstAndVox else 2, linear_to_db(0))
 			)
 			if is_instance_valid(player_strum_node.character_node):
 				conductor_node.connect("beat_hit", player_strum_node.character_node.beat_hit)

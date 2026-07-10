@@ -61,6 +61,7 @@ player = true
 
 [node name="PlaySceneCamera" type="Camera2D" parent="." unique_id=113894145]
 position = Vector2(640, 360)
+ignore_rotation = false
 script = ExtResource("3_ief5h")
 metadata/_custom_type_script = "uid://drey7rnoi6u22"
 
@@ -102,16 +103,16 @@ render_target_update_mode = 4
 [node name="OpponentStrum" parent="HUD/C/SubViewport" unique_id=50215536 instance=ExtResource("3_kdvgv")]
 offset_left = 40.0
 offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = -764.0
+offset_bottom = -561.0
 is_cpu_strum = true
 character = NodePath("../../../../Dad")
 
 [node name="PlayerStrum" parent="HUD/C/SubViewport" unique_id=352157946 instance=ExtResource("3_kdvgv")]
 offset_left = 764.0
 offset_top = 40.0
-offset_right = 252.0
-offset_bottom = -472.0
+offset_right = -40.0
+offset_bottom = -561.0
 is_cpu_strum = true
 character = NodePath("../../../../Bf")
 

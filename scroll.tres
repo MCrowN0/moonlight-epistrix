@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bd6lusc2qgbsn"]
+
+[sub_resource type="Shader" id="Shader_xew8n"]
+code = "shader_type canvas_item;
+
+uniform vec2 speed = vec2(1.0, 0.0);
+uniform float time = 0.0f;
+
+void fragment() {
+	COLOR = texture(TEXTURE, mod(UV + time * speed, 1.0));
+}"
+
+[resource]
+shader = SubResource("Shader_xew8n")
+shader_parameter/speed = Vector2(1, 0)
+shader_parameter/time = 0.0

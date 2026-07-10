@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ktc1rewsgpw" path="res://resources/textures/characters/satan.png" id="8_yeuor"]
 [ext_resource type="Texture2D" uid="uid://cwn7h0oeuapf2" path="res://resources/textures/characters/michaelfnf.png" id="9_qejsb"]
 
-[sub_resource type="Shader" id="Shader_xew8n"]
+[sub_resource type="Shader" id="Shader_yeuor"]
 code = "shader_type canvas_item;
 
 uniform vec2 speed = vec2(1.0, 0.0);
@@ -19,9 +19,45 @@ void fragment() {
 	COLOR = texture(TEXTURE, mod(UV + TIME * speed, 1.0));
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sjuw"]
-shader = SubResource("Shader_xew8n")
-shader_parameter/speed = Vector2(0.03, 0)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qejsb"]
+shader = SubResource("Shader_yeuor")
+shader_parameter/speed = Vector2(0.3, 0)
+
+[sub_resource type="Shader" id="Shader_hwcyl"]
+code = "shader_type canvas_item;
+
+uniform float threshold : hint_range(0.0, 2.0) = 0.8;
+uniform float intensity : hint_range(0.0, 5.0) = 1.2;
+uniform float blur_size : hint_range(0.0, 10.0) = 2.0;
+
+uniform sampler2D screen_texture: hint_screen_texture;
+
+void fragment() {
+	vec4 base = texture(screen_texture, SCREEN_UV);
+	vec2 px = blur_size / vec2(textureSize(screen_texture, 0));
+	vec4 sum = vec4(0.0);
+
+	sum += texture(screen_texture, SCREEN_UV + vec2(-px.x, -px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2( px.x, -px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2(-px.x,  px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2( px.x,  px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2(0.0, -px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2(0.0,  px.y));
+	sum += texture(screen_texture, SCREEN_UV + vec2(-px.x, 0.0));
+	sum += texture(screen_texture, SCREEN_UV + vec2( px.x, 0.0));
+	sum /= 8.0;
+
+	float lum = dot(sum.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 bloom = max(sum.rgb - threshold, 0.0) * intensity;
+
+	COLOR = vec4(base.rgb + bloom, base.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xew8n"]
+shader = SubResource("Shader_hwcyl")
+shader_parameter/threshold = 0.690000032775
+shader_parameter/intensity = 1.0550000501125
+shader_parameter/blur_size = 2.0
 
 [sub_resource type="Shader" id="Shader_qnmjb"]
 code = "shader_type canvas_item;
@@ -45,7 +81,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hwcyl"]
 shader = SubResource("Shader_qnmjb")
-shader_parameter/aberration_intensity = 2.10000003129252
+shader_parameter/aberration_intensity = 2.20000003278264
 shader_parameter/r_displacement = Vector2(1, 0)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(-1, 0)
@@ -61,7 +97,7 @@ position = Vector2(640, 360)
 texture = ExtResource("2_e0xg1")
 
 [node name="Clouds" type="Sprite2D" parent="." unique_id=1691725979]
-material = SubResource("ShaderMaterial_6sjuw")
+material = SubResource("ShaderMaterial_qejsb")
 position = Vector2(640, 360)
 texture = ExtResource("3_yeuor")
 
@@ -95,15 +131,15 @@ texture = ExtResource("9_qejsb")
 region_enabled = true
 region_rect = Rect2(519, 690, 244, 293)
 
-[node name="CanvasLayer3" type="CanvasLayer" parent="." unique_id=693516823]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1783846349]
 layer = 0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer3" unique_id=399676651]
-visible = false
-offset_left = -300.0
-offset_top = -221.0
-offset_right = 1613.0
-offset_bottom = 883.0
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=2068114107]
+material = SubResource("ShaderMaterial_xew8n")
+offset_left = -310.0
+offset_top = -173.0
+offset_right = 1589.0
+offset_bottom = 875.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=435181302]
 layer = 0
