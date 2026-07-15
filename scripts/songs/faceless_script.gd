@@ -62,11 +62,11 @@ func beat3(beat):
 func beat4(beat):
 	time_multiplier = 1.0
 	time_multiplier += 0.2
-	#print(beat)
 	
 	if beat % 8 in [0, 3, 5, 6, 7]:
 		if not beat % 8 == 6:
 			global_script.camera.zoom += Vector2(0.05, 0.05)
+			
 		arrow_scale = Vector2(0.69, 0.69)
 		tree.create_tween().tween_property(self, "arrow_scale", Vector2(0.75, 0.75), 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	if beat % 8 in [2, 6]:
@@ -75,7 +75,7 @@ func beat4(beat):
 			arrow_rotation = 10.0
 		else:
 			arrow_rotation = -10.0
-		tree.create_tween().tween_property(self, "arrow_rotation", 0.0, 0.5).set_trans(Tween.TRANS_BACK)
+		tree.create_tween().tween_property(self, "arrow_rotation", 0.0, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		
 		arrow_spread = 1.2
 		tree.create_tween().tween_property(self, "arrow_spread", 1.0, 0.6).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
@@ -117,7 +117,8 @@ func _init() -> void:
 	gf = play_scene.get_node('Gf')
 	bf = play_scene.get_node('Bf')
 	
-	dad.character = "spectre"
+	dad.character = "moose"
+	dad.kool = true
 	bf.character = "bf"
 	gf.queue_free()
 	
@@ -150,10 +151,12 @@ func _init() -> void:
 
 	add_event(3.52, func():
 		tree.create_tween().tween_property(global_script.opponent_strum, "modulate:a", 1.0, 1.0)
+		tree.create_tween().tween_property(global_script.opponent_strum, "scale", Vector2(1.0, 1.0), 1.0).from(Vector2(0.8, 0.8)).set_trans(Tween.TRANS_EXPO)
 	)
 	
 	add_event(8.47, func():
 		tree.create_tween().tween_property(global_script.player_strum, "modulate:a", 1.0, 1.0)
+		tree.create_tween().tween_property(global_script.player_strum, "scale", Vector2(1.0, 1.0), 1.0).from(Vector2(0.8, 0.8)).set_trans(Tween.TRANS_EXPO)
 	)
 	
 	add_event(19.76, func():
@@ -174,13 +177,6 @@ func _init() -> void:
 		global_script.play_scene.get_node("Conductor").connect("beat_hit", beat1)
 	)
 	
-	var centered_strum_pos: float = 640 - (476 / 2.0)
-	
-	#add_event(32.47, func():
-		#tree.create_tween().tween_property(global_script.opponent_strum, "position:x", centered_strum_pos, 0.3).set_trans(Tween.TRANS_QUAD)
-		#tree.create_tween().tween_property(global_script.player_strum, "position:x", centered_strum_pos, 0.3).set_trans(Tween.TRANS_QUAD)
-	#)
-		
 	add_event(33.88, func():
 		global_script.player_strum.downscroll = true
 		tree.create_tween().tween_property(global_script.player_strum, "position:y", 720 - 119 - 40.0, 0.3).set_trans(Tween.TRANS_QUAD)
@@ -211,7 +207,6 @@ func _init() -> void:
 	)
 	
 	add_event(45.17, func():
-		#tree.create_tween().tween_property(global_script, "bgrayscale_percent", 0, 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		global_script.camera.target_zoom = Vector2(0.9, 0.9)
 		note_eff = 1
 		global_script.play_scene.get_node("Conductor").connect("beat_hit", beat3)
@@ -221,6 +216,9 @@ func _init() -> void:
 		note_eff = 0
 		_reset_note_pos()
 		tree.create_tween().tween_property(self, "arrow_spread", 1.1, 0.76-0.41).set_trans(Tween.TRANS_EXPO)
+		tree.create_tween().tween_property(global_script.opponent_strum, "position:y", 95, 0.76-0.41).set_trans(Tween.TRANS_EXPO)
+		tree.create_tween().tween_property(global_script.player_strum, "position:y", 95, 0.76-0.41).set_trans(Tween.TRANS_EXPO)
+		global_script.hud.get_node("BlackBars").tween_to(75.0, 0.76-0.41, Tween.TRANS_EXPO)
 	)
 	
 	add_event(67.76, func():

@@ -61,8 +61,7 @@ func _enter_tree() -> void:
 				"rotate": rotation_degrees += intensity
 				"skew": skew += intensity
 		)
-		
-		
+
 var last_downscroll: bool = false
 
 func _rebuild_hold():
@@ -109,7 +108,10 @@ func _physics_process(delta: float) -> void:
 					if (target_time - (time_ms - note_length)) < 300.0:
 						var closeness: float = (target_time - (time_ms - note_length)) / 300.0
 						position.x += randf_range(-closeness * 5.0, closeness * 5.0)
-						#half_scroll = (parent_strum.scroll_speed * 0.5) * (closeness * 5.0)
+				"exposcroll":
+					pass
+					#var closeness: float = (target_time - (time_ms - note_length)) / target_time
+					#half_scroll = (parent_strum.scroll_speed * 0.5) * clamp(closeness, 0.1, 1.0)
 
 		if time_ms >= (target_time - 250):
 			if not target_time in parent_strum.note_times[note_id]:
@@ -162,8 +164,8 @@ func _physics_process(delta: float) -> void:
 				long_note.points = note_points
 				note_points = null
 		
-		var missed_offscreen: bool = (not downscroll and position.y < -200) or (downscroll and position.y > 920)
-		if time_ms >= ((target_time + note_length * 2) + 100) and missed_offscreen:
+		var missed_offscreen: bool = (not downscroll and position.y < -90) or (downscroll and position.y > 800)
+		if time_ms >= ((target_time + note_length) + 100) and missed_offscreen:
 			var idx = parent_strum.note_times[note_id].find(target_time)
 			if idx != -1:
 				parent_strum.note_times[note_id].remove_at(idx)

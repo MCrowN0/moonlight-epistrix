@@ -1,6 +1,6 @@
 class_name BlackBars extends Node2D
 
-var size: float = 0.0 :
+@export var size: float = 0.0 :
 	set(value):
 		size = value
 		$Top.size.y = value

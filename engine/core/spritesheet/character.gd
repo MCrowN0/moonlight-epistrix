@@ -130,21 +130,29 @@ func _physics_process(delta: float) -> void:
 		times_pressed.pop_back()
 
 var times_pressed: Array[float] = []
+var kool: bool = false
 
 @warning_ignore("unused_parameter")
 func note_hit(note_id: int, note_length: float, note_time: float, current_time: float, start_hold: bool) -> void:
 	if ignore_note_hits: return
 	
-	if not times_pressed.has(note_time):
-		frame = 0
-		times_pressed.append(note_time)
+	if not kool:
+		if not times_pressed.has(note_time):
+			frame = 0
+			times_pressed.append(note_time)
 	
 	if animation_sustain_thing and (not note_length <= 0) and animation == direction_animations[note_id]:
 		var ms_current_time: float = current_time * 1000.0
 		var hold_left: float = (note_length) - (ms_current_time - note_time)
-		var anim_dur: float = get_animation_duration(animation) * 100.0
+		var anim_dur: float = get_animation_duration(animation) * 1000.0
 		
-		if hold_left <= anim_dur: return
+		if hold_left <= anim_dur:
+			return
+	
+	if kool:
+		if not times_pressed.has(note_time):
+			frame = 0
+			times_pressed.append(note_time)
 	
 	animation = direction_animations[note_id]
 	frame = 0

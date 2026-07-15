@@ -12,6 +12,9 @@ var debug_play: bool = true
 
 signal on_save_loaded
 
+var normal_icon: Image = Image.load_from_file("res://icon.png")
+var x_icon: Image = Image.load_from_file("res://icon2.png")
+
 func _ready() -> void:
 	load_game()
 	on_save_loaded.emit()

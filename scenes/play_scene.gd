@@ -11,6 +11,13 @@ func _ready() -> void:
 	if ProjectData.song_events.has(cur_song):
 		$EventNode.set_script(ProjectData.song_events[cur_song])
 
-	await get_tree().create_timer(1.0).timeout
+	#await get_tree().create_timer(1.0).timeout
 	
 	$ChartHandler.start_chart("res://resources/music/%s/" % cur_song, "chart.bin")
+
+@warning_ignore("unused_parameter")
+func _process(delta: float) -> void:
+	if $ChartHandler.health < 0.5:
+		DisplayServer.window_set_icon(Global.x_icon)
+	else:
+		DisplayServer.window_set_icon(Global.normal_icon)
